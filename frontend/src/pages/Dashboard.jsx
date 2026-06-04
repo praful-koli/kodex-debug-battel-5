@@ -615,7 +615,7 @@ const Dashboard = () => {
                                   }}
                                 >
                                   <TableCell className="font-mono text-white text-xs">{order.orderNumber}</TableCell>
-                                  <TableCell>{order.customerName}</TableCell>
+                                  <TableCell className="text-white">{order.customerName}</TableCell>
                                   <TableCell className="text-white font-medium">{storeSettings.currency}{order.totalAmount.toFixed(2)}</TableCell>
                                   <TableCell>
                                     <Badge variant={
