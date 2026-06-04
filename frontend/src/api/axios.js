@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://kodex-debug-battel-5.onrender.com/api',
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
   withCredentials: true, // Required to send cookies
 });
 
@@ -31,7 +31,7 @@ instance.interceptors.response.use(
       
       try {
         // Attempt to refresh token
-        const res = await instance.post('https://kodex-debug-battel-5.onrender.com/api/auth/refresh', {}, { withCredentials: true });
+        const res = await instance.post(`${import.meta.env.VITE_API_URL}/api/auth/refresh`, {}, { withCredentials: true });
         
         // Save new access token
         localStorage.setItem('token', res.data.accessToken);
