@@ -31,7 +31,7 @@ instance.interceptors.response.use(
       
       try {
         // Attempt to refresh token
-        const res = await axios.post('https://kodex-debug-battel-5.onrender.com/api/auth/refresh', {}, { withCredentials: true });
+        const res = await instance.post('https://kodex-debug-battel-5.onrender.com/api/auth/refresh', {}, { withCredentials: true });
         
         // Save new access token
         localStorage.setItem('token', res.data.accessToken);
