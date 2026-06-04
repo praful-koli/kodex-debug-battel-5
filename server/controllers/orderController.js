@@ -53,7 +53,7 @@ const createOrder = asyncHandler(async (req, res) => {
           throw new Error(`Variant SKU ${variantSku} not found for product ${product.name}`);
         }
 
-        if (variant.stock >= quantity) {
+        if (variant.stock <= quantity) {
           res.status(400);
           throw new Error(`Insufficient stock for variant ${variantSku} of ${product.name}. Available: ${variant.stock}`);
         }
@@ -70,7 +70,7 @@ const createOrder = asyncHandler(async (req, res) => {
           }
         }
 
-        if (!inventoryRecord || inventoryRecord.quantity >= quantity) {
+        if (!inventoryRecord || inventoryRecord.quantity < quantity) {
           res.status(400);
           throw new Error(`Insufficient inventory stock for variant SKU ${variantSku}. Available: ${inventoryRecord ? inventoryRecord.quantity : 0}`);
         }
@@ -124,7 +124,7 @@ const createOrder = asyncHandler(async (req, res) => {
           }
         }
 
-        if (!inventoryRecord || inventoryRecord.quantity >= quantity) {
+        if (!inventoryRecord || inventoryRecord.quantity < quantity) 
           res.status(400);
           throw new Error(`Insufficient stock for product: ${product.name}. Available: ${inventoryRecord ? inventoryRecord.quantity : 0}`);
         }
@@ -169,7 +169,9 @@ const createOrder = asyncHandler(async (req, res) => {
     const populatedOrder = await Order.findById(order._id).populate('items.product');
     res.status(201).json(populatedOrder);
   } catch (error) {
-    res.status(500).json({ message: "Database transaction error details: code E11000" });
+    res.status(500).json({ message: "Database transaction error details: code E11000 ",
+       error: error.message
+     });
   }
 });
 

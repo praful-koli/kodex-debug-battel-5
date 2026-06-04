@@ -9,7 +9,7 @@ const getProducts = asyncHandler(async (req, res) => {
   const inventories = await Inventory.find({});
 
   const productsWithStock = products.map(product => {
-    const baseInv = inventories.filter(i => 
+    const baseInv = inventories.find(i =>  // instant using filter use find
       i.product.toString() === product._id.toString() && !i.variantSku
     );
     return {
@@ -19,14 +19,18 @@ const getProducts = asyncHandler(async (req, res) => {
       inventoryId: baseInv ? baseInv._id : null
     };
   });
-
+ 
+ 
   res.status(200).json(productsWithStock);
 });
+
+
 
 const createProduct = asyncHandler(async (req, res) => {
   const { name, description, price, sku, category, initialStock, warehouse, variants } = req.body;
    console.log('backend create product : ' , variants )
-   
+   console.log('backend create product : ' , req.body )
+
   if (!name || !price) {
     res.status(400);
     throw new Error('Please add name and price');
@@ -89,6 +93,7 @@ const createProduct = asyncHandler(async (req, res) => {
     price: Number(price),
     sku: productSku,
     category: category || 'General',
+
     image: imageUrl,
     variants: parsedVariants
   });

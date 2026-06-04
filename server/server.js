@@ -11,7 +11,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors({ origin: 'https://kodex-debug-battel-5.vercel.app', credentials: true }));
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+// app.use(cors({ origin: 'https://kodex-debug-battel-5.vercel.app', credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

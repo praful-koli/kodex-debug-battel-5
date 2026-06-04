@@ -124,7 +124,6 @@ const Dashboard = () => {
     stock: '',
     sku: ''
   });
-
   const [newOrder, setNewOrder] = useState({
     customerName: '',
     status: 'Pending',
@@ -186,7 +185,7 @@ const Dashboard = () => {
       alert('Price and Stock are required to define a product variant.');
       return;
     }
-
+   console.log("189 handle addvarantDraf , " , variantDraft)
     const varSku = variantDraft.sku.trim() || 'VAR-' + Math.random().toString(36).substr(2, 6).toUpperCase();
     
     // Check if variant SKU is unique in draft list
@@ -226,7 +225,7 @@ const Dashboard = () => {
       formData.append('initialStock', newProduct.initialStock);
       formData.append('warehouse', newProduct.warehouse);
       formData.append('variants', productVariants.toString());
-
+      console.log('variants 229' , productVariants )
       if (productImage) {
         formData.append('image', productImage);
       }
@@ -308,7 +307,7 @@ const Dashboard = () => {
           quantity: Number(item.quantity)
         }))
       };
-      const response = await axios.post('/order', payload);
+      const response = await axios.post('/orders', payload);
       showToast(`Order ${response.data.orderNumber} created successfully.`, 'success');
       setShowOrderModal(false);
       setNewOrder({
@@ -398,7 +397,7 @@ const Dashboard = () => {
     }
   };
 
-  // Helpers for summary metrics
+  // Helpers for summary metricsF
   const totalSales = orders
     .filter(o => o.status !== 'Cancelled')
     .reduce((sum, o) => sum + o.totalAmount, 0);
@@ -409,6 +408,7 @@ const Dashboard = () => {
 
   if (!user) return null;
 
+ 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-black text-zinc-100 font-sans">
       
@@ -749,7 +749,7 @@ const Dashboard = () => {
                                     )}
                                   </div>
                                 </TableCell>
-                                <TableCell>{product.category}</TableCell>
+                                <TableCell className='text-white'>{product.category}</TableCell>
                                 <TableCell className="text-white font-medium">
                                   {product.variants && product.variants.length > 0 ? (
                                     <span className="text-xs text-zinc-400 font-mono">
@@ -759,7 +759,7 @@ const Dashboard = () => {
                                     `${storeSettings.currency}${product.price.toFixed(2)}`
                                   )}
                                 </TableCell>
-                                <TableCell className="text-zinc-300 font-mono">{product.stock}</TableCell>
+                                <TableCell className="text-white ">{product.stock}</TableCell>
                                 <TableCell>
                                   {product.stock === 0 ? (
                                     <Badge variant="destructive">Out of stock</Badge>
@@ -861,7 +861,7 @@ const Dashboard = () => {
                                       ))}
                                     </div>
                                   </TableCell>
-                                  <TableCell>{new Date(order.createdAt).toLocaleDateString()}</TableCell>
+                                  <TableCell className="text-white font-medium" >{new Date(order.createdAt).toLocaleDateString()}</TableCell>
                                   <TableCell className="text-white font-medium">{storeSettings.currency}{order.totalAmount.toFixed(2)}</TableCell>
                                   <TableCell>
                                     <Badge variant={
@@ -934,7 +934,7 @@ const Dashboard = () => {
                                 <TableCell className="text-zinc-300">{inv.product?.name || 'Deleted Product'}</TableCell>
                                 <TableCell className="font-mono text-zinc-400 text-xs">{inv.variantSku || '(Base Product)'}</TableCell>
                                 <TableCell className="font-mono font-bold text-white">{inv.quantity}</TableCell>
-                                <TableCell className="text-xs">{new Date(inv.updatedAt).toLocaleString()}</TableCell>
+                                <TableCell className="text-white">{new Date(inv.updatedAt).toLocaleString()}</TableCell>
                                 <TableCell>
                                   {inv.quantity === 0 ? (
                                     <Badge variant="destructive">Stock Empty</Badge>
