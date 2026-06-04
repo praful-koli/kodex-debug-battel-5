@@ -124,7 +124,7 @@ const createOrder = asyncHandler(async (req, res) => {
           }
         }
 
-        if (!inventoryRecord || inventoryRecord.quantity < quantity) 
+        if (!inventoryRecord || inventoryRecord.quantity < quantity) {
           res.status(400);
           throw new Error(`Insufficient stock for product: ${product.name}. Available: ${inventoryRecord ? inventoryRecord.quantity : 0}`);
         }

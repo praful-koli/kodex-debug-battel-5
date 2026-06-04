@@ -1049,10 +1049,10 @@ const Dashboard = () => {
                               <UserCircle className="h-4 w-4 text-zinc-400" />
                               Technical Profile Details
                             </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-zinc-450">
-                              <p><span className="font-semibold text-zinc-350">ID:</span> {user.id || user._id}</p>
-                              <p><span className="font-semibold text-zinc-355">Username:</span> {user.username}</p>
-                              <p><span className="font-semibold text-zinc-355">Email:</span> {user.email}</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2  text-white">
+                              <p><span className="font-semibold text-white-350">ID:</span> {user.id || user._id}</p>
+                              <p><span className="font-semibold text-white-355">Username:</span> {user.username}</p>
+                              <p><span className="font-semibold text-white-355">Email:</span> {user.email}</p>
                               <p className="sm:col-span-2 break-all">
                                 <span className="font-semibold text-zinc-355">Hashed Secret:</span>{' '}
                                 <code className="bg-black border border-zinc-800 px-1.5 py-0.5 rounded text-[10px] text-zinc-400 font-mono select-all">
@@ -1084,9 +1084,9 @@ const Dashboard = () => {
                     </CardHeader>
                     <CardContent>
                       {isEditingProfile ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                          <div className="space-y-2">
-                            <Label className="text-zinc-300 text-xs">Primary Skill</Label>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 text-white">
+                          <div className="space-y-2 ">
+                            <Label className="text-white text-xs">Primary Skill</Label>
                             <Select value={profileData.skills} onValueChange={(val) => setProfileData({ ...profileData, skills: val })}>
                               <SelectTrigger className="bg-black border-zinc-800 text-white">
                                 <SelectValue placeholder="Select a skill..." />
@@ -1145,7 +1145,7 @@ const Dashboard = () => {
                           </div>
                         </div>
                       ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-white">
                           <div className="p-4 rounded bg-zinc-900/40 border border-zinc-800 flex items-start gap-3">
                             <div className="bg-black p-2 rounded border border-zinc-900">
                               <GraduationCap className="h-5 w-5 text-zinc-300" />
